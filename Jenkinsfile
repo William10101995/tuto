@@ -1,3 +1,5 @@
+
+
 pipeline {
     agent { label 'tuto' }
     
@@ -5,20 +7,10 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                container('podman') {
+                container('flyway') {
                     script {
-                        sh 'podman run hello-world'
-                    }
-                }
-                container('kubectl') {
-                    script {
-                        sh 'env'
-                        sh 'kubectl get pod'
-                    }
-                }
-                container('fortune') {
-                    script {
-                        sh 'fortune'
+                        sh 'flyway info -url="jdbc:mysql://mysql.mysql.svc.cluster.local:3306/devops" -user=elon -password=musk'
+
                     }
                 }
             }
